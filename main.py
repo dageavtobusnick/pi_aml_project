@@ -1,8 +1,10 @@
 from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 
-model = BertForSequenceClassification.from_pretrained("./finetuned-bert-news-classifier")
-tokenizer = BertTokenizer.from_pretrained("./finetuned-bert-news-classifier")
+model = BertForSequenceClassification.from_pretrained(
+    "./finetuned-bert-news-classifier")
+tokenizer = BertTokenizer.from_pretrained(
+    "./finetuned-bert-news-classifier")
 
 text = "Apple releases the new iPhone 12 with amazing features."
 
