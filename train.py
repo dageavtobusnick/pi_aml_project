@@ -19,7 +19,6 @@ def tokenize_function(examples):
                      truncation=True, max_length=512)
 
 
-
 train_dataset = train_dataset.map(tokenize_function, batched=True)
 val_dataset = val_dataset.map(tokenize_function, batched=True)
 
