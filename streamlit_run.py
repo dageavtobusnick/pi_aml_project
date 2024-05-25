@@ -32,8 +32,8 @@ selected_category = st.selectbox("Выберите категорию для ф�
                                  ["Все"] + ['World', 'Sports',
                                             'Business', 'Sci/Tech'])
 
-filtered_news = [news for news in st.session_state.news_data 
-                 if selected_category == "Все" 
+filtered_news = [news for news in st.session_state.news_data
+                 if selected_category == "Все"
                  or news['category'] == selected_category]
 
 if filtered_news:
