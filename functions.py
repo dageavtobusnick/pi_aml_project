@@ -7,6 +7,7 @@ def tokenize_function(text):
     tokenizer.save_pretrained("./finetuned-bert-news-classifier")
     return tokenizer(text, padding="max_length", truncation=True)
 
+
 def predict(text):
     model = BertForSequenceClassification.from_pretrained(
                         "./finetuned-bert-news-classifier")
