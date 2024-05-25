@@ -1,0 +1,10 @@
+transformers[torch]
+transformers
+datasets
+torch
+scikit-learn
+sentencepiece
+sacremoses
+streamlit
+uvicorn
+langdetect
