@@ -6,7 +6,8 @@ from sklearn.model_selection import train_test_split
 
 dataset = load_dataset("ag_news")
 
-train_dataset, val_dataset = train_test_split(dataset['train'], test_size=0.2)
+train_dataset, val_dataset = train_test_split(dataset['train'],
+                                              test_size=0.2, random_state=42)
 
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 model = BertForSequenceClassification.from_pretrained(
@@ -14,7 +15,8 @@ model = BertForSequenceClassification.from_pretrained(
 
 
 def tokenize_function(examples):
-    return tokenizer(examples['text'], padding="max_length", truncation=True)
+    return tokenizer(examples['text'], padding="max_length",
+                     truncation=True, max_length=512)
 
 
 train_dataset = train_dataset.map(tokenize_function, batched=True)
@@ -45,6 +47,8 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=8,
     num_train_epochs=3,
     weight_decay=0.01,
+    logging_dir='./logs',
+    logging_steps=10,
 )
 
 trainer = Trainer(
