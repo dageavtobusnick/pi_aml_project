@@ -16,7 +16,8 @@ def compute_metrics(eval_pred):
 def load_and_split_dataset(dataset_name, split_ratio=0.2, seed=42):
     dataset = load_dataset(dataset_name)
     train_dataset, val_dataset = train_test_split(dataset['train'],
-                            test_size=split_ratio, random_state=seed)
+                                                  test_size=split_ratio,
+                                                  random_state=seed)
     return DatasetDict({"train": train_dataset, "validation": val_dataset})
 
 
@@ -25,7 +26,9 @@ def tokenize_and_format_datasets(datasets, max_length=512):
                                       batched=True)
     tokenized_datasets = tokenized_datasets.rename_column("label", "labels")
     tokenized_datasets.set_format("torch",
-                        columns=["input_ids", "attention_mask", "labels"])
+                                  columns=["input_ids",
+                                           "attention_mask",
+                                           "labels"])
     return tokenized_datasets
 
 
