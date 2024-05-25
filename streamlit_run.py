@@ -6,7 +6,7 @@ if 'news_data' not in st.session_state:
     st.session_state.news_data = []
 
 
-def add_news(title, category, content):
+def add_news(title, content):
     st.session_state.news_data.append({
         'title': title,
         'category': functions.predict(content),
@@ -20,19 +20,21 @@ st.title("Новостной сайт")
 st.header("Добавить новость")
 with st.form(key='news_form'):
     title = st.text_input("Заголовок")
-    category = st.selectbox("Категория", ["Политика", "Экономика", "Спорт", "Технологии", "Культура", "Здоровье"])
     content = st.text_area("Содержание")
     submit_button = st.form_submit_button(label="Добавить новость")
-    
     if submit_button and title and content:
-        add_news(title, category, content)
+        add_news(title, content)
         st.success("Новость добавлена!")
 
 
 st.header("Новости")
-selected_category = st.selectbox("Выберите категорию для фильтрации", ["Все"] + ["Политика", "Экономика", "Спорт", "Технологии", "Культура", "Здоровье"])
+selected_category = st.selectbox("Выберите категорию для фильтрации",
+                                 ["Все"] + ['World', 'Sports',
+                                            'Business', 'Sci/Tech'])
 
-filtered_news = [news for news in st.session_state.news_data if selected_category == "Все" or news['category'] == selected_category]
+filtered_news = [news for news in st.session_state.news_data 
+                 if selected_category == "Все" 
+                 or news['category'] == selected_category]
 
 if filtered_news:
     for news in filtered_news:
