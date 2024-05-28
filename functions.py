@@ -12,7 +12,8 @@ def predict(text):
     model = BertForSequenceClassification.from_pretrained(
                         "./finetuned-bert-news-classifier")
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=512)
+    inputs = tokenizer(text, return_tensors="pt",
+                       padding=True, truncation=True, max_length=512)
     outputs = model(**inputs)
     predictions = torch.argmax(outputs.logits, dim=-1)
     categories = ['World', 'Sports', 'Business', 'Sci/Tech']
