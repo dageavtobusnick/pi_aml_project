@@ -5,4 +5,4 @@ candidate_labels = ["business", "sports", "politics", "technology"]
 
 result = functions.predict(text, candidate_labels)
 
-print(result)
+print(result[0])
