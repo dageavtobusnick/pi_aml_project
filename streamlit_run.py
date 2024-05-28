@@ -11,7 +11,7 @@ labels = ["business", "sports", "politics", "technology"]
 def add_news(title, content):
     st.session_state.news_data.append({
         'title': title,
-        'category': functions.predict(content,labels),
+        'category': functions.predict(content, labels),
         'content': content,
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
