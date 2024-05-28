@@ -1,6 +1,8 @@
 import functions
 
-text = "Apple releases the new iPhone 12 with amazing features."
+text = input()
+candidate_labels = ["business", "sports", "politics", "technology"]
 
-predicted_category = functions.predict(text)
-print(f'The predicted category is: {predicted_category}')
+result = functions.predict(text, candidate_labels)
+
+print(result)
