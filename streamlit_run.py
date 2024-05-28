@@ -5,7 +5,8 @@ from datetime import datetime
 if 'news_data' not in st.session_state:
     st.session_state.news_data = []
 
-labels= ["business", "sports", "politics", "technology"]
+labels = ["business", "sports", "politics", "technology"]
+
 
 def add_news(title, content):
     st.session_state.news_data.append({
