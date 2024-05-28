@@ -5,11 +5,13 @@ from datetime import datetime
 if 'news_data' not in st.session_state:
     st.session_state.news_data = []
 
+labels = ["business", "sports", "politics", "technology"]
+
 
 def add_news(title, content):
     st.session_state.news_data.append({
         'title': title,
-        'category': functions.predict(content),
+        'category': functions.predict(content, labels),
         'content': content,
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
@@ -29,8 +31,7 @@ with st.form(key='news_form'):
 
 st.header("Новости")
 selected_category = st.selectbox("Выберите категорию для фильтрации",
-                                 ["Все"] + ['World', 'Sports',
-                                            'Business', 'Sci/Tech'])
+                                 ["Все"] + labels)
 
 filtered_news = [news for news in st.session_state.news_data
                  if selected_category == "Все"
