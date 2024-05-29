@@ -22,7 +22,7 @@ def show_comments(news_id):
     if news_id in st.session_state.comments_data:
         for comment in st.session_state.comments_data[news_id]:
             st.write(comment)
-     
+
 
 labels = ["business", "sports", "politics", "technology"]
 news = [("New Business Strategy",
