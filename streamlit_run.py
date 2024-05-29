@@ -6,7 +6,7 @@ if 'news_data' not in st.session_state:
     st.session_state.news_data = []
     st.session_state.news_id_counter = 0
     st.session_state.init = False
-    
+
 if 'comments_data' not in st.session_state:
     st.session_state.comments_data = {}
 
@@ -22,7 +22,7 @@ def show_comments(news_id):
     if news_id in st.session_state.comments_data:
         for comment in st.session_state.comments_data[news_id]:
             st.write(comment)
-            
+          
 
 labels = ["business", "sports", "politics", "technology"]
 news = [("New Business Strategy",
@@ -34,7 +34,7 @@ news = [("New Business Strategy",
         ("Government Policy Update",
          "The government has announced a new policy" +
          " initiative to address environmental issues."),
- 	    ("New Tech Product Launch",
+        ("New Tech Product Launch",
        "A leading technology company has launched " +
        "a new product that promises to revolutionize the industry.")]
 
