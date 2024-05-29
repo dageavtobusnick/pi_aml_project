@@ -47,7 +47,7 @@ def add_news(title, content):
     st.session_state.news_data.append({
         'id': news_id,
         'title': title,
-        'category': functions.predict(content, labels)[0],
+        'category': functions.predict(content, labels)[0][0],
         'content': content,
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
