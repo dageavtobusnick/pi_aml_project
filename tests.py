@@ -1,6 +1,7 @@
 import unittest
 from functions import predict
 
+
 class TestPredict(unittest.TestCase):
 
     def test_predict_single_text(self):
@@ -16,12 +17,16 @@ class TestPredict(unittest.TestCase):
         expected = ["weather", "books"]
         result = predict(texts, labels)
         self.assertEqual(result, expected)
-        
+
     def test_predict_multiple_news(self):
-        texts = ["Economists predict strong economic growth for the upcoming fiscal year.",
-                 "The results of the recent elections have been announced, with the incumbent party winning a majority.",
-                 "Researchers have made significant advancements in artificial intelligence, leading to new breakthroughs.",
-                 "The football club has signed a promising young player from the local academy."]
+        texts = ["Economists predict strong economic growth for" +
+                 " the upcoming fiscal year.",
+                 "The results of the recent elections have been " +
+                 "announced, with the incumbent party winning a majority.",
+                 "Researchers have made significant advancements " +
+                 "in artificial intelligence, leading to new breakthroughs.",
+                 "The football club has signed a promising " +
+                 " player from the local academy."]
         labels = ["business", "sports", "politics", "technology"]
         expected = ["business", "politics", "technology", "sports"]
         result = predict(texts, labels)
@@ -44,6 +49,7 @@ class TestPredict(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             predict(["The weather is nice today."], "weather")
+
 
 if __name__ == '__main__':
     unittest.main()
