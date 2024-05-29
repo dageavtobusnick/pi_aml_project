@@ -32,8 +32,7 @@ def predict(texts: Union[str, List[str]],
         labels (List[str]): A list of candidate labels.
 
     Returns:
-        List[Tuple[str, float]]: A list of tuples
-        with the predicted label and its score.
+        List[str]: A list of the predicted labels.
     """
     if not isinstance(texts, (list, str)):
         raise ValueError("The 'texts' parameter should be" +
@@ -58,4 +57,4 @@ def predict(texts: Union[str, List[str]],
     classifier = initialize_classifier("typeform/distilbert-base-uncased-mnli")
     results = classifier(texts, labels)
 
-    return [(result['labels'][0], result['scores'][0]) for result in results]
+    return [result['labels'][0] for result in results]
