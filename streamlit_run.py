@@ -22,7 +22,7 @@ def show_comments(news_id):
     if news_id in st.session_state.comments_data:
         for comment in st.session_state.comments_data[news_id]:
             st.write(comment)
-          
+     
 
 labels = ["business", "sports", "politics", "technology"]
 news = [("New Business Strategy",
@@ -35,8 +35,8 @@ news = [("New Business Strategy",
          "The government has announced a new policy" +
          " initiative to address environmental issues."),
         ("New Tech Product Launch",
-       "A leading technology company has launched " +
-       "a new product that promises to revolutionize the industry.")]
+         "A leading technology company has launched " +
+         "a new product that promises to revolutionize the industry.")]
 
 
 def add_news(title, content):
