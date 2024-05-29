@@ -25,16 +25,16 @@ def show_comments(news_id):
 labels = ["business", "sports", "politics", "technology"]
 news = [
     ("New Business Strategy",
-     "Our company has announced a new business " +
+     "Our company has announced a new business "\
      "strategy aimed at increasing market share."),
     ("Team Wins Championship",
-     "Our local sports team has won the championship" +
+     "Our local sports team has won the championship"\
      "for the third consecutive year."),
     ("Government Policy Update",
-     "The government has announced a new policy" +
+     "The government has announced a new policy"\
      " initiative to address environmental issues."),
  	("New Tech Product Launch",
-   "A leading technology company has launched " +
+   "A leading technology company has launched "\
    "a new product that promises to revolutionize the industry."),
 ]
 
@@ -43,18 +43,19 @@ def add_news(title, content):
     news_id = st.session_state.news_id_counter
     st.session_state.news_id_counter += 1
     st.session_state.news_data.append({
-        'id' : news_id,
+        'id': news_id,
         'title': title,
         'category': functions.predict(content, labels),
         'content': content,
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
+
 if not st.session_state.init:
     for n in news:
         add_news(n[0], n[1])
     st.session_state.init=True
-    
+
 st.title("News Site")
 st.header("Add News")
 
@@ -88,13 +89,17 @@ else:
     st.write("No news in this category.")
 
 news_titles = [news['title'] for news in filtered_news]
-selected_news_index = st.selectbox("Select News to View",
+index = st.selectbox("Select News to View",
                                    range(len(news_titles)),
                                    format_func=lambda i:
                                        news_titles[i]
                                        if i < len(news_titles)
                                        else "")
-selected_news_id = filtered_news[selected_news_index]['id'] if filtered_news else None
+if filtered_news:
+    selected_news_id = filtered_news[index]['id']
+else:
+    selected_news_id = None
+    
 if selected_news_id:
     st.header("Comments")
     show_comments(selected_news_id)
