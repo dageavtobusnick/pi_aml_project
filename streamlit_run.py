@@ -8,10 +8,8 @@ def initialize_session_state():
         st.session_state.news_data = []
         st.session_state.news_id_counter = 0
         st.session_state.init = False
-
     if 'comments_data' not in st.session_state:
         st.session_state.comments_data = {}
-
 
 def add_comment(news_id, comment):
     if news_id in st.session_state.comments_data:
@@ -19,11 +17,21 @@ def add_comment(news_id, comment):
     else:
         st.session_state.comments_data[news_id] = [comment]
 
-
 def show_comments(news_id):
     if news_id in st.session_state.comments_data:
         for comment in st.session_state.comments_data[news_id]:
             st.write(comment)
+
+def add_news(title, content):
+    news_id = st.session_state.news_id_counter
+    st.session_state.news_id_counter += 1
+    st.session_state.news_data.append({
+        'id': news_id,
+        'title': title,
+        'category': functions.predict(content, labels)[0],
+        'content': content,
+        'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    })
 
 
 labels = ["business", "sports", "politics", "technology"]
@@ -39,19 +47,6 @@ news = [("New Business Strategy",
         ("New Tech Product Launch",
          "A leading technology company has launched " +
          "a new product that promises to revolutionize the industry.")]
-
-
-def add_news(title, content):
-    news_id = st.session_state.news_id_counter
-    st.session_state.news_id_counter += 1
-    st.session_state.news_data.append({
-        'id': news_id,
-        'title': title,
-        'category': functions.predict(content, labels)[0],
-        'content': content,
-        'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    })
-
 
 initialize_session_state()
 
