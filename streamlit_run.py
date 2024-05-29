@@ -94,8 +94,8 @@ news_titles = [news['title'] for news in filtered_news]
 index = st.selectbox("Select News to View",
                      range(len(news_titles)),
                      format_func=lambda i:
-                         news_titles[i] if i < len(news_titles) 
-                                         else "")
+                         news_titles[i] if i < len(news_titles)
+                         else "")
 if filtered_news:
     selected_news_id = filtered_news[index]['id']
 else:
