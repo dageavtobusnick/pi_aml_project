@@ -36,8 +36,8 @@ news = [
      "The government has announced a new policy" +
      " initiative to address environmental issues."),
  	("New Tech Product Launch",
-   "A leading technology company has launched " +
-   "a new product that promises to revolutionize the industry."),
+     "A leading technology company has launched " +
+     "a new product that promises to revolutionize the industry.")
 ]
 
 
