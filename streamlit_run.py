@@ -11,16 +11,19 @@ def initialize_session_state():
     if 'comments_data' not in st.session_state:
         st.session_state.comments_data = {}
 
+
 def add_comment(news_id, comment):
     if news_id in st.session_state.comments_data:
         st.session_state.comments_data[news_id].append(comment)
     else:
         st.session_state.comments_data[news_id] = [comment]
 
+
 def show_comments(news_id):
     if news_id in st.session_state.comments_data:
         for comment in st.session_state.comments_data[news_id]:
             st.write(comment)
+
 
 def add_news(title, content):
     news_id = st.session_state.news_id_counter
