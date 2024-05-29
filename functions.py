@@ -41,7 +41,7 @@ def predict(texts: Union[str, List[str]],
     if isinstance(texts, str):
         texts = [texts]
 
-    if not isinstance(labels, list) or not all(isinstance(label, str) 
+    if not isinstance(labels, list) or not all(isinstance(label, str)
                                                for label in labels):
         raise ValueError("The 'labels' parameter should be a list of strings.")
 
@@ -57,5 +57,5 @@ def predict(texts: Union[str, List[str]],
 
     classifier = initialize_classifier("typeform/distilbert-base-uncased-mnli")
     results = classifier(texts, labels)
-   
+
     return [(result['labels'][0], result['scores'][0]) for result in results]
