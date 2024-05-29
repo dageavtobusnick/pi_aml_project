@@ -2,6 +2,7 @@ import streamlit as st
 import functions
 from datetime import datetime
 
+
 def initialize_session_state():
     if 'news_data' not in st.session_state:
         st.session_state.news_data = []
@@ -51,6 +52,7 @@ def add_news(title, content):
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
+
 initialize_session_state()
 
 if not st.session_state.init:
@@ -88,7 +90,10 @@ else:
     st.write("No news in this category.")
 
 news_titles = [news['title'] for news in filtered_news]
-index = st.selectbox("Select News to View", range(len(news_titles)), format_func=lambda i: news_titles[i] if i < len(news_titles) else "")
+index = st.selectbox("Select News to View",
+                     range(len(news_titles)),
+                     format_func=lambda i:
+                         news_titles[i] if i < len(news_titles) else "")
 selected_news_id = filtered_news[index]['id'] if filtered_news else None
 
 if selected_news_id:
