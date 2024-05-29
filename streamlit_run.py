@@ -2,13 +2,14 @@ import streamlit as st
 import functions
 from datetime import datetime
 
-if 'news_data' not in st.session_state:
-    st.session_state.news_data = []
-    st.session_state.news_id_counter = 0
-    st.session_state.init = False
+def initialize_session_state():
+    if 'news_data' not in st.session_state:
+        st.session_state.news_data = []
+        st.session_state.news_id_counter = 0
+        st.session_state.init = False
 
-if 'comments_data' not in st.session_state:
-    st.session_state.comments_data = {}
+    if 'comments_data' not in st.session_state:
+        st.session_state.comments_data = {}
 
 
 def add_comment(news_id, comment):
@@ -50,6 +51,7 @@ def add_news(title, content):
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
+initialize_session_state()
 
 if not st.session_state.init:
     for n in news:
@@ -58,7 +60,6 @@ if not st.session_state.init:
 
 st.title("News Site")
 st.header("Add News")
-
 with st.form(key='news_form'):
     title = st.text_input("Title")
     content = st.text_area("Content")
@@ -67,14 +68,12 @@ with st.form(key='news_form'):
         add_news(title, content)
         st.success("News Added!")
 
-
 st.header("News")
-selected_category = st.selectbox("Select Category to Filter",
-                                 ["All"] + labels)
-
-filtered_news = [news for news in st.session_state.news_data
-                 if selected_category == "All"
-                 or news['category'] == selected_category]
+selected_category = st.selectbox("Select Category to Filter", ["All"] + labels)
+filtered_news = [
+    news for news in st.session_state.news_data
+    if selected_category == "All" or news['category'] == selected_category
+]
 
 if filtered_news:
     for news in filtered_news:
@@ -89,20 +88,12 @@ else:
     st.write("No news in this category.")
 
 news_titles = [news['title'] for news in filtered_news]
-index = st.selectbox("Select News to View",
-                     range(len(news_titles)),
-                     format_func=lambda i:
-                         news_titles[i] if i < len(news_titles)
-                         else "")
-if filtered_news:
-    selected_news_id = filtered_news[index]['id']
-else:
-    selected_news_id = None
+index = st.selectbox("Select News to View", range(len(news_titles)), format_func=lambda i: news_titles[i] if i < len(news_titles) else "")
+selected_news_id = filtered_news[index]['id'] if filtered_news else None
 
 if selected_news_id:
     st.header("Comments")
     show_comments(selected_news_id)
-
 
 st.header("Add Comment")
 with st.form(key='comment_form'):
