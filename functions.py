@@ -15,34 +15,41 @@ def initialize_classifier(model_name: str):
     """
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForSequenceClassification.from_pretrained(model_name)
-    classifier = pipeline('zero-shot-classification', model=model, tokenizer=tokenizer)
+    classifier = pipeline('zero-shot-classification',
+                          model=model,
+                          tokenizer=tokenizer)
     return classifier
 
 
-def predict(texts: Union[str, List[str]], labels: List[str]) -> List[Tuple[str, float]]:
+def predict(texts: Union[str, List[str]],
+            labels: List[str]) -> List[Tuple[str, float]]:
     """
-    Predict the most likely label for each text from a list of candidate labels.
+    Predict the most likely label for each
+    text from a list of candidate labels.
 
     Args:
         texts (Union[str, List[str]]): The input text or a list of texts.
         labels (List[str]): A list of candidate labels.
 
     Returns:
-        List[Tuple[str, float]]: A list of tuples with the predicted label and its score.
+        List[Tuple[str, float]]: A list of tuples
+        with the predicted label and its score.
     """
     if not isinstance(texts, (list, str)):
-        raise ValueError("The 'texts' parameter should be a string or a list of strings.")
+        raise ValueError("The 'texts' parameter should be" +
+                         " a string or a list of strings.")
     if isinstance(texts, str):
         texts = [texts]
 
-    if not isinstance(labels, list) or not all(isinstance(label, str) for label in labels):
+    if not isinstance(labels, list) or not all(isinstance(label, str) 
+                                               for label in labels):
         raise ValueError("The 'labels' parameter should be a list of strings.")
-    
+
     if not texts:
         raise ValueError("The 'texts' list should not be empty.")
     if not labels:
         raise ValueError("The 'labels' list should not be empty.")
-    
+
     if any(not text.strip() for text in texts):
         raise ValueError("The 'texts' list should not contain empty strings.")
     if any(not label.strip() for label in labels):
@@ -50,5 +57,5 @@ def predict(texts: Union[str, List[str]], labels: List[str]) -> List[Tuple[str, 
 
     classifier = initialize_classifier("typeform/distilbert-base-uncased-mnli")
     results = classifier(texts, labels)
-    
+   
     return [(result['labels'][0], result['scores'][0]) for result in results]
