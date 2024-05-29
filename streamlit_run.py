@@ -10,11 +10,13 @@ if 'news_data' not in st.session_state:
 if 'comments_data' not in st.session_state:
     st.session_state.comments_data = {}
 
+
 def add_comment(news_id, comment):
     if news_id in st.session_state.comments_data:
         st.session_state.comments_data[news_id].append(comment)
     else:
         st.session_state.comments_data[news_id] = [comment]
+
 
 def show_comments(news_id):
     if news_id in st.session_state.comments_data:
@@ -25,16 +27,16 @@ def show_comments(news_id):
 labels = ["business", "sports", "politics", "technology"]
 news = [
     ("New Business Strategy",
-     "Our company has announced a new business "\
+     "Our company has announced a new business " \
      "strategy aimed at increasing market share."),
     ("Team Wins Championship",
-     "Our local sports team has won the championship"\
+     "Our local sports team has won the championship" \
      "for the third consecutive year."),
     ("Government Policy Update",
-     "The government has announced a new policy"\
+     "The government has announced a new policy" \
      " initiative to address environmental issues."),
  	("New Tech Product Launch",
-   "A leading technology company has launched "\
+   "A leading technology company has launched " \
    "a new product that promises to revolutionize the industry."),
 ]
 
@@ -99,7 +101,7 @@ if filtered_news:
     selected_news_id = filtered_news[index]['id']
 else:
     selected_news_id = None
-    
+
 if selected_news_id:
     st.header("Comments")
     show_comments(selected_news_id)
